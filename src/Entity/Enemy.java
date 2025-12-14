@@ -3,6 +3,7 @@ package Entity;
 import Main.GamePanel;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.IOException;
 
 public class Enemy extends Entity {
@@ -17,9 +18,11 @@ public class Enemy extends Entity {
         getEnemyImage();
     }
 
-    public void setDefaults(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void setDefaults(int tilex, int tiley) {
+        this.Worldx = tilex*gp.tileSize;
+        this.Worldy = tiley*gp.tileSize;
+        ScreenX = Worldx + player.ScreenX;
+        ScreenY = Worldy - player.Worldy + player.ScreenY;
         speed = 2;
         direction_x = "left";
         direction_y = "";
@@ -42,10 +45,12 @@ public class Enemy extends Entity {
     }
 
     public void update() {
-        upMove = player.y - y < -speed ? 1 : 0;
-        downMove = player.y - y > speed ? 1 : 0;
-        leftMove = player.x - x < -speed ? 1 : 0;
-        rightMove = player.x - x > speed ? 1 : 0;
+        upMove = player.Worldy - Worldy < -speed ? 1 : 0;
+        downMove = player.Worldy - Worldy > speed ? 1 : 0;
+        leftMove = player.Worldx - Worldx < -speed ? 1 : 0;
+        rightMove = player.Worldx - Worldx > speed ? 1 : 0;
         moveEntity();
+        ScreenX = Worldx - player.Worldx + player.ScreenX;
+        ScreenY = Worldy - player.Worldy + player.ScreenY;
     }
 }

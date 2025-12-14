@@ -17,11 +17,13 @@ public class Player extends Entity {
         this.keyH = keyH;
         setDefaults();
         getPlayerImage();
+        ScreenX = gp.screenwidth/2.0 - (gp.tileSize/2.0);
+        ScreenY = gp.screenheight/2.0 - (gp.tileSize/2.0);
     }
 
     public void setDefaults() {
-        x = 100;
-        y = 100;
+        Worldx = gp.tileSize * 24;
+        Worldy = gp.tileSize * 27;
         speed = 4;
         direction_x = "left";
         direction_y = "";

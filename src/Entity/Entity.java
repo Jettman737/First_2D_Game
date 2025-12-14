@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 import static java.lang.Math.sqrt;
 
-public class Entity {
-    public double speed, x,y;
+public abstract class Entity {
+    public double speed, Worldx, Worldy, ScreenX, ScreenY;
     int upMove, downMove, leftMove, rightMove;
     double x_move, y_move;
     public BufferedImage left, right, up, down, Right_Up, Right_Down, Left_Up, Left_Down;
@@ -28,8 +28,8 @@ public class Entity {
             y_move /= sqrt(2);
         }
 
-        x += x_move*speed;
-        y += y_move*speed;
+        Worldy += y_move*speed;
+        Worldx += x_move*speed;
     }
 
     public void drawEntity(Graphics2D g2, GamePanel gp) {
@@ -61,6 +61,6 @@ public class Entity {
                 default -> image;
             };
         }
-        g2.drawImage(image, (int) x, (int) y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, (int) ScreenX, (int) ScreenY, gp.tileSize, gp.tileSize, null);
     }
 }
