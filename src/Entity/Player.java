@@ -8,17 +8,18 @@ import java.awt.*;
 import java.io.IOException;
 
 public class Player extends Entity {
-
-    GamePanel gp;
     KeyHandler keyH;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
-        setDefaults();
-        getPlayerImage();
         ScreenX = gp.screenwidth/2.0 - (gp.tileSize/2.0);
         ScreenY = gp.screenheight/2.0 - (gp.tileSize/2.0);
+
+        collisionBox = new Rectangle(8,16,48,64);
+
+        setDefaults();
+        getPlayerImage();
     }
 
     public void setDefaults() {

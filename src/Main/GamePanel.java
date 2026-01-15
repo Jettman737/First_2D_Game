@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class GamePanel extends JPanel implements Runnable{
 
     //Screen Settings
+    public static final double FIXED_DELTA = 1.0 / 60.0;
     final int originalTileSize = 16;
     final int scale = 4;
 
@@ -29,8 +30,11 @@ public class GamePanel extends JPanel implements Runnable{
     //FPS
     int FPS = 60;
 
-    TileManager TileM = new TileManager(this);
+    public TileManager TileM = new TileManager(this);
     KeyHandler Keys =  new KeyHandler();
+    Calculations Calc = new Calculations(this);
+    public CollisionCheck collisionCheck = new CollisionCheck(this);
+
     Thread GameThread;
     public Player player = new Player(this, Keys);
     private final ArrayList<Enemy> Enemies = new ArrayList<>();
@@ -63,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
         while(GameThread != null) {
             FPS++;
             currentTime = System.nanoTime();
+
             delta += (currentTime - lastTime)/drawInterval;
             timer += (currentTime - lastTime);
             lastTime = currentTime;
